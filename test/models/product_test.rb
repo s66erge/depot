@@ -37,7 +37,7 @@ class ProductTest < ActiveSupport::TestCase
       price:       1
     ).tap do |product|
       product.image.attach(
-        io: File.open("db/images/#{filename}"), filename:, content_type:)
+        io: File.open("test/fixtures/files/#{filename}"), filename:, content_type:)
     end
   end
 
@@ -47,6 +47,31 @@ class ProductTest < ActiveSupport::TestCase
 
     product = new_product("logo.svg", "image/svg+xml")
     assert_not product.valid?, "image/svg+xml must be invalid"
+  end
+
+  test "product is not valid without a unique title" do
+    product = Product.new(title:       products(:pragprog).title,
+                          description: "yyy",
+                          price:       1)
+    product.image.attach(io: File.open("test/fixtures/files/lorem.jpg"),
+                         filename: "lorem.jpg", content_type: "image/jpeg")
+
+    assert product.invalid?
+    assert_equal [ "has already been taken" ], product.errors[:title]
+  end
+
+  test "product is not valid without a unique title - i18n" do
+    product = Product.new(title:       products(:pragprog).title,
+                          description: "yyy",
+                          price:       1)
+
+    product.image.attach(io: File.open("test/fixtures/files/lorem.jpg"),
+                         filename: "lorem.jpg", content_type: "image/jpeg")
+
+
+    assert product.invalid?
+    assert_equal [ I18n.translate("errors.messages.taken") ],
+                 product.errors[:title]
   end
 
   # test "the truth" do
