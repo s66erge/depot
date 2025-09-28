@@ -3,6 +3,9 @@ class Product < ApplicationRecord
   after_commit -> { broadcast_refresh_later_to "products" }
   validates :title , :description , :image , presence: true
   validates :title , uniqueness: true
+  validates :price , numericality: { greater_than_or_equal_to: 0.01 }
+  validates :title, length: { minimum: 10 }
+  #validate :minimum_title_len
   validate :acceptable_image
   def acceptable_image
     return unless image.attached?
@@ -11,5 +14,9 @@ class Product < ApplicationRecord
       errors.add(:image, "must be a GIF, JPG or PNG image")
     end
   end
-  validates :price , numericality: { greater_than_or_equal_to: 0.01 }
+  def minimum_title_len
+    unless title.length > 9
+      errors.add(:title, "must be at least 9 characters long")
+    end
+  end
 end
