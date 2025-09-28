@@ -4,8 +4,8 @@ class Product < ApplicationRecord
   validates :title , :description , :image , presence: true
   validates :title , uniqueness: true
   validates :price , numericality: { greater_than_or_equal_to: 0.01 }
-  validates :title, length: { minimum: 10 }
-  #validate :minimum_title_len
+  #validates :title, length: { minimum: 10 }
+  validate :minimum_title_len
   validate :acceptable_image
   def acceptable_image
     return unless image.attached?
@@ -15,8 +15,9 @@ class Product < ApplicationRecord
     end
   end
   def minimum_title_len
-    unless title.length > 9
-      errors.add(:title, "must be at least 9 characters long")
+    minimum_length = 10
+    unless :title.length > minimum_length
+      errors.add(:title, "must be at least #{minimum_length} characters long")
     end
   end
 end
