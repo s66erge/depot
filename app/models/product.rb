@@ -7,6 +7,7 @@ class Product < ApplicationRecord
   validates :title, length: { minimum: 10 }
   validate :minimum_title_len
   validate :acceptable_image
+
   def acceptable_image
     return unless image.attached?
     acceptable_types = %w[image/gif image/jpeg image/png]
@@ -14,6 +15,7 @@ class Product < ApplicationRecord
       errors.add(:image, "must be a GIF, JPG or PNG image")
     end
   end
+
   def minimum_title_len
     return unless title
     minimum_length = 10
