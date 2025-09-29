@@ -21,7 +21,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
       post products_url, params: {
         product: {
           description: @product.description,
-          image: file_fixture_upload("lorem.jpg" ,"image/jpeg"),
+          image: file_fixture_upload("lorem.jpg", "image/jpeg"),
           price: @product.price,
           title: @title
         }
@@ -45,7 +45,7 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
     patch product_url(@product), params: {
       product: {
         description: @product.description,
-        image: file_fixture_upload("lorem.jpg" ,"image/jpeg"),
+        image: file_fixture_upload("lorem.jpg","image/jpeg"),
         price: @product.price,
         title: @title
       }

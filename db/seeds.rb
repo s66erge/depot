@@ -9,7 +9,9 @@
 #   end
 #
 # encoding: utf-8
+
 Product.delete_all
+
 product = Product.create(title: 'Programming Ruby 3.3 (5th Edition)',
                          description:
                            %(<p>
@@ -74,4 +76,3 @@ product.image.attach(io: File.open(
                      filename: 'nrclient2.jpg')
 
 product.save!
-
