@@ -12,18 +12,18 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "product price must be positive" do
-    product = Product.new(title:       "My Book Title",
+    product = Product.new(title: "My Book Title",
                           description: "yyy")
     product.image.attach(io: File.open("test/fixtures/files/lorem.jpg"),
                          filename: "lorem.jpg", content_type: "image/jpeg")
     product.price = -1
     assert product.invalid?
-    assert_equal [ "must be greater than or equal to 0.01" ],
+    assert_equal ["must be greater than or equal to 0.01"],
                  product.errors[:price]
 
     product.price = 0
     assert product.invalid?
-    assert_equal [ "must be greater than or equal to 0.01" ],
+    assert_equal ["must be greater than or equal to 0.01"],
                  product.errors[:price]
 
     product.price = 1
@@ -32,9 +32,9 @@ class ProductTest < ActiveSupport::TestCase
 
   def new_product(filename, content_type)
     Product.new(
-      title:       "My Book Title",
+      title: "My Book Title",
       description: "yyy",
-      price:       1
+      price: 1
     ).tap do |product|
       product.image.attach(
         io: File.open("test/fixtures/files/#{filename}"), filename:, content_type:)
@@ -50,27 +50,26 @@ class ProductTest < ActiveSupport::TestCase
   end
 
   test "product is not valid without a unique title" do
-    product = Product.new(title:       products(:pragprog).title,
+    product = Product.new(title: products(:pragprog).title,
                           description: "yyy",
-                          price:       1)
+                          price: 1)
     product.image.attach(io: File.open("test/fixtures/files/lorem.jpg"),
                          filename: "lorem.jpg", content_type: "image/jpeg")
 
     assert product.invalid?
-    assert_equal [ "has already been taken" ], product.errors[:title]
+    assert_equal ["has already been taken"], product.errors[:title]
   end
 
   test "product is not valid without a unique title - i18n" do
-    product = Product.new(title:       products(:pragprog).title,
+    product = Product.new(title: products(:pragprog).title,
                           description: "yyy",
-                          price:       1)
+                          price: 1)
 
     product.image.attach(io: File.open("test/fixtures/files/lorem.jpg"),
                          filename: "lorem.jpg", content_type: "image/jpeg")
 
-
     assert product.invalid?
-    assert_equal [ I18n.translate("errors.messages.taken") ],
+    assert_equal [I18n.translate("errors.messages.taken")],
                  product.errors[:title]
   end
 
