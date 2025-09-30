@@ -20,6 +20,10 @@ Rails.application.configure do
 
   # Show full error reports.
   config.consider_all_requests_local = true
+
+  # ATTENTION Disable controller and fragment caching for tests
+  # https://thoughtbot.com/blog/fragment-caching-in-tests
+  config.action_controller.perform_caching = false
   config.cache_store = :null_store
 
   # Render exception templates for rescuable exceptions and raise for other exceptions.

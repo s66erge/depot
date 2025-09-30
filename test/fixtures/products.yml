@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
-  description: MyText
+  title: MyString1
+  description: MyText1
   price: 9.99
 
 two:
-  title: MyString
-  description: MyText
-  price: 9.99
+  title: MyString2
+  description: MyText2
+  price: 19.99
 
 pragprog:
   title: The Pragmatic Programmer
   description:
     Your Journey To Mastery, 20th Anniversary Edition (2nd Edition)
-  price:       39.99
+  price: 39.99
