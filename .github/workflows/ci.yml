@@ -69,6 +69,9 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
+      - name: Prepare test data
+        run: bin/rails db:fixtures:load
+
       - name: Run tests
         env:
           RAILS_ENV: test
