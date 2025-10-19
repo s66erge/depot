@@ -76,9 +76,7 @@ jobs:
 
 
       - name: Load test database fixtures
-        env:
-          RAILS_ENV: test
-        run: bin/rails db:fixtures:load
+        run: RAILS_ENV=development bin/rails db:fixtures:load
 
       - name: Run tests
         env:
