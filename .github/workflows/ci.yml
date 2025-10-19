@@ -69,12 +69,6 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      #- name: Prepare test database schema
-      #  env:
-      #    RAILS_ENV: test
-      #  run: bin/rails db:schema:load
-
-
       - name: Load test database fixtures
         run: RAILS_ENV=development bin/rails db:fixtures:load
 
@@ -82,8 +76,8 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: sqlite3:db/test.sqlite3
-        run: bin/rails db:test:prepare test test:system
-        # run: bin/rails test test:system
+        # run: bin/rails db:test:prepare test test:system
+        run: bin/rails test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
