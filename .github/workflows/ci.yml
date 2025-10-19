@@ -69,7 +69,15 @@ jobs:
           ruby-version: .ruby-version
           bundler-cache: true
 
-      - name: Prepare test data
+      - name: Prepare the test database schema for testing
+        env:
+          DATABASE_URL: sqlite3:db/test.sqlite3
+        run: bin/rails db:test:prepare
+
+      - name: Load YAML fixtures without strict test environment
+        env:
+          RAILS_ENV: development
+          DATABASE_URL: sqlite3:db/test.sqlite3
         run: bin/rails db:fixtures:load
 
       - name: Run tests
@@ -77,7 +85,8 @@ jobs:
           RAILS_ENV: test
           DATABASE_URL: sqlite3:db/test.sqlite3
           # REDIS_URL: redis://localhost:6379/0
-        run: bin/rails db:test:prepare test test:system
+        # run: bin/rails db:test:prepare test test:system
+        run: bin/rails test test:system
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
