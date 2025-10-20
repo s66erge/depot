@@ -58,7 +58,7 @@ class ProductTest < ActiveSupport::TestCase
                          filename: "lorem.jpg", content_type: "image/jpeg")
 
     assert product.invalid?
-    assert_equal [ "has already been taken" ], product.errors[ :title ]
+    assert_equal [ "has already been taken" ], product.errors[:title]
   end
 
   test "product is not valid without a unique title - i18n" do
@@ -70,7 +70,7 @@ class ProductTest < ActiveSupport::TestCase
                          filename: "lorem.jpg", content_type: "image/jpeg")
 
     assert product.invalid?
-    assert_equal [I18n.translate("errors.messages.taken")],
+    assert_equal [ I18n.translate("errors.messages.taken") ],
                  product.errors[:title]
   end
 
