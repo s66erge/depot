@@ -60,7 +60,6 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
 
     assert Product.exists?(products(:two).id)
   end
-
   # test "should destroy product 'one' not in cart" do
   #   assert_difference("Product.count", -1) do
   #     delete product_url(@product)
@@ -68,5 +67,4 @@ class ProductsControllerTest < ActionDispatch::IntegrationTest
   #
   #   assert_redirected_to products_url
   # end
-
 end
