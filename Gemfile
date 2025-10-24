@@ -46,6 +46,7 @@ group :development, :test do
   # All runtime config comes from the UNIX environment
   # but we use dotenv to store that in files for
   # development and testing
+  # # see dotenv at https://github.com/bkeepers/dotenv
   gem "dotenv-rails"
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
