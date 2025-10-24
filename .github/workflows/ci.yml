@@ -83,16 +83,13 @@ jobs:
 
       - name: Load test database fixtures
         env:
-          PGHOST: localhost
-          PGUSER: postgres
-          PGPASSWORD: postgres
-          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/depot_test
         run: RAILS_ENV=development bin/rails db:fixtures:load
 
       - name: Run tests
         env:
           RAILS_ENV: test
-          DATABASE_URL: sqlite3:db/test.sqlite3
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/depot_test
         # run: bin/rails db:test:prepare test test:system
         run: bin/rails test test:system
 
