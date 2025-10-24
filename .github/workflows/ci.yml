@@ -67,8 +67,9 @@ jobs:
           POSTGRES_DB: depot_test
 
     steps:
+
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
 
       - name: Install packages
         run: |
@@ -82,8 +83,6 @@ jobs:
           bundler-cache: true
 
       - name: Load test database fixtures
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/depot_test
         run: RAILS_ENV=development bin/rails db:fixtures:load
 
       - name: Run tests
