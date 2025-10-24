@@ -83,6 +83,9 @@ jobs:
           bundler-cache: true
 
       - name: Load test database fixtures
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/depot_test
         run: RAILS_ENV=development bin/rails db:fixtures:load
 
       - name: Run tests
