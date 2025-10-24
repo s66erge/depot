@@ -85,7 +85,7 @@ jobs:
       - name: Load test database fixtures
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/depot_test
-        run: RAILS_ENV=development bin/rails db:fixtures:load
+        run: bin/rails db:fixtures:load
 
       - name: Run tests
         env:
