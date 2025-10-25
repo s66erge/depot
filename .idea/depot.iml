@@ -26,6 +26,23 @@
       <excludeFolder url="file://$MODULE_DIR$/tmp" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/bundle" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/cache" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/dataSources" />
+      <excludeFolder url="file://$MODULE_DIR$/.idea/queries" />
+      <excludeFolder url="file://$MODULE_DIR$/app/assets/builds/tailwind" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/09" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/1b" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/1v" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/35" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/3c" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/3i" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/79" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/8s" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/av" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/az" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/bq" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/em" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/jf" />
+      <excludeFolder url="file://$MODULE_DIR$/storage/oj" />
     </content>
     <orderEntry type="jdk" jdkName="ruby-3.4.3-p32" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
