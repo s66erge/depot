@@ -19,6 +19,7 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "user_name", with: @user.name
     fill_in "user_password", with: "secret2"
     fill_in "user_password_confirmation", with: "secret2"
+    find_field("user_password_confirmation").send_keys(:tab)
     click_button "Update User"
     assert_current_path users_url
     assert_text "was successfully updated"
@@ -42,10 +43,10 @@ class UsersTest < ApplicationSystemTestCase
     fill_in "user_email_address", with: "zero@example.com"
     fill_in "user_password", with: "password"
     fill_in "user_password_confirmation", with: "password"
+    find_field("user_password_confirmation").send_keys(:tab)
     click_button "Create User"
     assert_no_current_path new_user_url
     assert_text "was successfully created"
     page.go_back
   end
-
 end
