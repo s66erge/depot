@@ -40,3 +40,6 @@
 # .env.*.local files are where we put actual secrets we need for dev and test,
 # so we really don't want them in version control
 .env.*.local
+
+# Ignore rubymine configuration files
+/.idea/
