@@ -69,4 +69,4 @@ ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Start server via Thruster by default, this can be overwritten at runtime
 EXPOSE 80
-CMD bin/rails db:prepare && bin/rails server -b 0.0.0.0 -p ${PORT}
+CMD bin:rails db:prepare && bin/rails server -b 0.0.0.0 -p ${PORT}
