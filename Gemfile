@@ -72,6 +72,3 @@ end
 
 gem "hotwire-spark", "~> 0.1.13", group: :development
 
-gem "sidekiq", "~> 8.0"
-
-gem "sidekiq-cron", "~> 2.3"
