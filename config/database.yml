@@ -87,8 +87,7 @@ production:
   primary: &primary_production
     <<: *default
     database: depot_production
-    #username: postgres
-    #password: <%= ENV["MYAPP_DATABASE_PASSWORD"] %>
+    url: <%= ENV["PRIMARY_DATABASE_URL"] %>
   cache:
     <<: *primary_production
     database: depot_production_cache
