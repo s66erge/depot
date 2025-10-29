@@ -73,8 +73,8 @@ Rails.application.configure do
     port: 587,
     enable_starttls_auto: true,
     authentication: "plain",
-    open_timeout: 60,
-    read_timeout: 60
+    open_timeout: 20,
+    read_timeout: 20
   }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
