@@ -11,9 +11,9 @@
   </h1>
 
   <ul>
-    <% cache @products do %>
+    <% # cache @products do %>
       <% @products.each do |product| %>
-        <% cache @products do %>
+        <% #cache @products do %>
           <li class='flex mb-6'>
             <%= image_tag(product.image,
                           class: 'object-contain w-40 h-48 shadow mr-6') %>
@@ -36,8 +36,8 @@
               </div>
             </div>
           </li>
-        <% end %>
+        <% # end %>
       <% end %>
-    <% end %>
+    <% # end %>
   </ul>
 </div>
