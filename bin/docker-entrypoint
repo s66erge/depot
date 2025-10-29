@@ -11,4 +11,6 @@ if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   echo "Running database setup for all databases..."
   ./bin/rails db:prepare
   echo "Running database setup complete"fi
+fi
+
 exec "${@}"
