@@ -10,8 +10,6 @@ fi
 if [[ "$*" == *"rails server"* ]] || [[ "$*" == *"bin/rails server"* ]]; then
   echo "Running database setup for all databases..."
   ./bin/rails db:prepare
-  echo "Running database seed for prod db..."
-  ./bin/rails db:seed
   echo "Running database setup complete"
 fi
 
