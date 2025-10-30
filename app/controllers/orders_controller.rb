@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  require "resend"
+  require "mailform"
+
   allow_unauthenticated_access only: %i[ new create ]
   include CurrentCart
   before_action :set_cart, only: %i[ new create ]
@@ -32,7 +35,18 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
+        # params = {
+        #   "from": "Acme <onboarding@resend.dev>",
+        #   "to": [ "spegoff@authentica.eu" ],
+        #   "subject": "hello world",
+        #   "html": "<strong>it works!</strong>"
+        # }
+        # sent = Resend::Emails.send(params)
+        # puts sent
+        params = Mailform.received(@order)
+        sent = Resend::Emails.send(params)
+        puts sent
+        # ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
         format.html { redirect_to store_index_url, notice: "Thank you for your order." }
         format.json { render :show, status: :created, location: @order }
       else

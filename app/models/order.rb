@@ -1,5 +1,6 @@
 class Order < ApplicationRecord
   require "pago"
+  require "resend"
 
   enum :pay_type, {
     "Check" => 0,
@@ -46,10 +47,10 @@ class Order < ApplicationRecord
     )
 
     if payment_result.succeeded?
-      OrderMailer.received(self).deliver_later
+      # mailer = OrderMailer.received(self)
+      # mailer.deliver_now!
     else
       raise payment_result.error
     end
   end
 end
-
