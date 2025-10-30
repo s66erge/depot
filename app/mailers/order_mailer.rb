@@ -18,6 +18,7 @@ class OrderMailer < ApplicationMailer
         "text": render_to_string('order_mailer/received', layout: false)
       }
       Resend::Emails.send(params)
+      Rails.logger.info "Resend email success"
     rescue Resend::Error => e
       Rails.logger.error "Resend email failed: #{e.message}"
     end

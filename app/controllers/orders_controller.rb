@@ -38,6 +38,7 @@ class OrdersController < ApplicationController
         #OrderMailer.new.received(@order)
         #puts "Text email sent successfully"
         ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
+        Rails.logger.info "launched job: ChargeOrderJob -> order.charge!"
         format.html { redirect_to store_index_url, notice: "Thank you for your order." }
         format.json { render :show, status: :created, location: @order }
       else

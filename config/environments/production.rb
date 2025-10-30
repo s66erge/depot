@@ -64,18 +64,18 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: "example.com" }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    password: ENV["GMAIL_PASSWORD"],
-    user_name: ENV["GMAIL_USERNAME"],
-    address: "smtp.gmail.com",
-    domain: "gmail.com",
-    port: 587,
-    enable_starttls_auto: true,
-    authentication: "plain",
-    open_timeout: 20,
-    read_timeout: 20
-  }
+  config.action_mailer.delivery_method = :resend
+  # config.action_mailer.smtp_settings = {
+  #   password: ENV["GMAIL_PASSWORD"],
+  #   user_name: ENV["GMAIL_USERNAME"],
+  #   address: "smtp.gmail.com",
+  #   domain: "gmail.com",
+  #   port: 587,
+  #   enable_starttls_auto: true,
+  #   authentication: "plain",
+  #   open_timeout: 20,
+  #   read_timeout: 20
+  # }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
@@ -95,4 +95,5 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
 end
