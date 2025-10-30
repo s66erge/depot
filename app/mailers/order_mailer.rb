@@ -11,15 +11,11 @@ class OrderMailer < ApplicationMailer
     Resend.api_key = ENV["RESEND_API_KEY"]
     begin
       @order = order
-      # raw_template = File.read('app/views/order_mailer/received.text.erb')
-      # erb_template = ERB.new(raw_template)
-      # texta = erb_template.result(binding)
-      texta = render_to_string('order_mailer/received', layout: false)
       params = {
         "from": "Your App <onboarding@resend.dev>", # Must be a verified sender in Resend
         "to": order.email,
         "subject": "Pragmatic Store order confirmation",
-        "text": texta
+        "text": render_to_string('order_mailer/received', layout: false)
       }
       sent = Resend::Emails.send(params)
       puts sent
