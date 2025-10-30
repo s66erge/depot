@@ -8,7 +8,7 @@ class OrderMailer < ApplicationMailer
   default from: 'no-reply@example.com'
 
   def received(order)
-    Resend.api_key = ENV["RESEND_API_KEY"]
+    # Resend.api_key = ENV["RESEND_API_KEY"]
     begin
       @order = order
       params = {
@@ -17,8 +17,7 @@ class OrderMailer < ApplicationMailer
         "subject": "Pragmatic Store order confirmation",
         "text": render_to_string('order_mailer/received', layout: false)
       }
-      sent = Resend::Emails.send(params)
-      puts sent
+      Resend::Emails.send(params)
     rescue Resend::Error => e
       Rails.logger.error "Resend email failed: #{e.message}"
     end

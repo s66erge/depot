@@ -35,17 +35,9 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        # params = Mailform.received(@order)
-        # sent = Resend::Emails.send(params)
-        # puts sent
-
-        # Render the view template as plain text (layout usually does not apply)
-        # Send plain text email
-        OrderMailer.new.received(@order)
-        #mailer.deliver_now!
-        puts "Text email sent successfully"
-
-        # OrderJob.perform_later(@order, pay_type_params.to_h)
+        #OrderMailer.new.received(@order)
+        #puts "Text email sent successfully"
+        ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
         format.html { redirect_to store_index_url, notice: "Thank you for your order." }
         format.json { render :show, status: :created, location: @order }
       else

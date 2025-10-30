@@ -47,8 +47,7 @@ class Order < ApplicationRecord
     )
 
     if payment_result.succeeded?
-      # mailer = OrderMailer.received(self)
-      # mailer.deliver_now!
+      OrderMailer.new.received(self)
     else
       raise payment_result.error
     end
