@@ -119,6 +119,7 @@ GEM
     ffi (1.17.2-arm-linux-musl)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
+    fileutils (1.8.0)
     fugit (1.11.2)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -416,6 +417,7 @@ DEPENDENCIES
   csv (~> 3.1)
   debug
   dotenv-rails
+  fileutils
   hotwire-spark (~> 0.1.13)
   importmap-rails
   jbuilder

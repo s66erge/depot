@@ -76,3 +76,4 @@ gem "hotwire-spark", "~> 0.1.13", group: :development
 # See send email with API [https://resend.com/docs/send-with-rails#1-install]
 gem "resend", "~> 0.6.0"
 gem "csv", "~> 3.1"
+gem "fileutils"
