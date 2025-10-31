@@ -6,6 +6,7 @@ local:
   service: Disk
   root: <%= Rails.root.join("storage") %>
 
+# Production storage using Railway volume path
 railprodvolume:
   service: Disk
   root: <%= ENV['RAILWAY_VOLUME_PATH'] %> 
