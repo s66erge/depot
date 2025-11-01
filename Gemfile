@@ -63,6 +63,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  # automatic reload of page when program changes
+  gem "hotwire-spark", "~> 0.1.13"
 end
 
 group :test do
@@ -71,9 +73,11 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "hotwire-spark", "~> 0.1.13", group: :development
-
 # See send email with API [https://resend.com/docs/send-with-rails#1-install]
 gem "resend", "~> 0.6.0"
-gem "csv", "~> 3.1"
+
+# To manipulate files from the ruby console
 gem "fileutils"
+
+gem "csv", "~> 3.1"
+
