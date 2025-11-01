@@ -64,8 +64,7 @@ class OrdersTest < ApplicationSystemTestCase
     assert_text "Thank you for your order"
 
     perform_enqueued_jobs
-    perform_enqueued_jobs
-    assert_performed_jobs 2
+    assert_performed_jobs 1
 
     orders = Order.all
     assert_equal 1, orders.size
@@ -77,9 +76,10 @@ class OrdersTest < ApplicationSystemTestCase
     assert_equal "Check",            order.pay_type
     assert_equal 1, order.line_items.size
 
-    mail = ActionMailer::Base.deliveries.last
-    assert_equal [ "dave@example.com" ],               mail.to
-    assert_equal "Sam Ruby <depot@example.com>",       mail[:from].value
-    assert_equal "Pragmatic Store Order Confirmation", mail.subject
+    # mail = ActionMailer::Base.deliveries.last
+    params = OrderMailer.new(order).show_last_params
+    assert_equal "dave@example.com", params[:to].first
+    assert_equal "Pragmatic Store order confirmation", params[:subject]
+    assert_match(/1 x MyString1/, params[:text])
   end
 end

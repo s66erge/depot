@@ -1,6 +1,8 @@
 class OrderMailer < ApplicationMailer
   require "resend"
 
+  @@last_params = nil
+
   def initialize(order)
     @order =  order
     @param1 = {
@@ -9,10 +11,14 @@ class OrderMailer < ApplicationMailer
     }
   end
 
+  def show_last_params
+    @@last_params
+  end
+
   def send_it(params, method_name, content_type)
     params[content_type.to_sym] = render_to_string("#{File.basename(__FILE__, ".*")}/#{method_name}", layout: false)
     if Rails.env.test?
-      params
+      @@last_params = params
     else
       begin
         Resend::Emails.send(params)
