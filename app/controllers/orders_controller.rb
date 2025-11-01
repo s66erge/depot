@@ -35,8 +35,7 @@ class OrdersController < ApplicationController
       if @order.save
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
-        #OrderMailer.new.received(@order)
-        #puts "Text email sent successfully"
+        # OrderMailer.new(order).received
         ChargeOrderJob.perform_later(@order, pay_type_params.to_h)
         Rails.logger.info "launched job: ChargeOrderJob -> order.charge!"
         format.html { redirect_to store_index_url, notice: "Thank you for your order." }

@@ -2,22 +2,20 @@ require "test_helper"
 
 class OrderMailerTest < ActionMailer::TestCase
   test "received" do
-    mail = OrderMailer.received(orders(:one))
-    assert_equal "Pragmatic Store Order Confirmation", mail.subject
-    assert_equal [ "dave@example.org" ], mail.to
-    assert_equal [ "depot@example.com" ], mail.from
-    assert_match /1 x The Pragmatic Programmer/, mail.body.encoded
+    params = OrderMailer.new(orders(:one)).received
+    assert_equal "Pragmatic Store order confirmation", params[:subject]
+    assert_equal "dave@example.org", params[:to].first
+    assert_match(/1 x The Pragmatic Programmer/, params[:text])
   end
 
   test "shipped" do
-    mail = OrderMailer.shipped(orders(:one))
-    assert_equal "Pragmatic Store Order Shipped", mail.subject
-    assert_equal [ "dave@example.org" ], mail.to
-    assert_equal [ "depot@example.com" ], mail.from
+    params = OrderMailer.new(orders(:one)).shipped
+    assert_equal "Pragmatic Store order shipped", params[:subject]
+    assert_equal "dave@example.org", params[:to].first
     assert_match %r{
       <td[^>]*>1<\/td>\s*
       <td>&times;<\/td>\s*
       <td[^>]*>\s*The\sPragmatic\sProgrammer\s*</td>
-    }x, mail.body.encoded
+    }x, params[:html]
   end
 end

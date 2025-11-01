@@ -1,37 +1,44 @@
 class OrderMailer < ApplicationMailer
   require "resend"
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.order_mailer.received.subject
-  default from: 'no-reply@example.com'
+  def initialize(order)
+    @order =  order
+    @param1 = {
+      to: [ @order.email ],
+      from: "Your App <onboarding@resend.dev>" # Must be a verified sender in Resend
+    }
+  end
 
-  def received(order)
-    # Resend.api_key = ENV["RESEND_API_KEY"]
-    begin
-      @order = order
-      params = {
-        "from": "Your App <onboarding@resend.dev>", # Must be a verified sender in Resend
-        "to": order.email,
-        "subject": "Pragmatic Store order confirmation",
-        "text": render_to_string('order_mailer/received', layout: false)
-      }
-      Resend::Emails.send(params)
-      Rails.logger.info "Resend email success"
-    rescue Resend::Error => e
-      Rails.logger.error "Resend email failed: #{e.message}"
+  def send_it(params, method_name, content_type)
+    params[content_type.to_sym] = render_to_string("#{File.basename(__FILE__, ".*")}/#{method_name}", layout: false)
+    if Rails.env.test?
+      params
+    else
+      begin
+        Resend::Emails.send(params)
+        Rails.logger.info "Resend email success: subject=#{params[:subject]}, to=#{params[:to]}"
+      rescue Resend::Error => e
+        Rails.logger.error "Resend email failed: #{e.message}"
+      end
     end
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
   #
-  #   en.order_mailer.shipped.subject
-  #
-  def shipped(order)
-    @order = order
+  #   en.order_mailer.received.subject
 
-    mail to: order.email, subject: "Pragmatic Store Order Shipped"
+  def received
+      params = @param1.merge({
+        subject: "Pragmatic Store order confirmation"
+      })
+      send_it(params, __method__, "text")
+  end
+
+  def shipped
+      params = @param1.merge({
+        subject: "Pragmatic Store order shipped"
+      })
+      send_it(params, __method__, "html")
   end
 end

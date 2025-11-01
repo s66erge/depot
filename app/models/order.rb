@@ -47,7 +47,7 @@ class Order < ApplicationRecord
     )
 
     if payment_result.succeeded?
-      OrderMailer.new.received(self)
+      OrderMailer.new(self).received
     else
       raise payment_result.error
     end
