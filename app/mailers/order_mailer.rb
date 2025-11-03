@@ -15,8 +15,8 @@ class OrderMailer < ApplicationMailer
     @@last_params
   end
 
-  def send_it(params, method_name, content_type)
-    params[content_type.to_sym] = render_to_string("#{File.basename(__FILE__, ".*")}/#{method_name}", layout: false)
+  def send_it(params) # , method_name, content_type)
+    # params[content_type.to_sym] = render_to_string("#{File.basename(__FILE__, ".*")}/#{method_name}", layout: false)
     if Rails.env.test?
       @@last_params = params
     else
@@ -36,15 +36,17 @@ class OrderMailer < ApplicationMailer
 
   def received
       params = @param1.merge({
-        subject: "Pragmatic Store order confirmation"
+        subject: "Pragmatic Store order confirmation",
+        text: render_to_string("#{File.basename(__FILE__, ".*")}/#{__method__}")
       })
-      send_it(params, __method__, "text")
+      send_it(params)
   end
 
   def shipped
       params = @param1.merge({
-        subject: "Pragmatic Store order shipped"
+        subject: "Pragmatic Store order shipped",
+        html: render_to_string("#{File.basename(__FILE__, ".*")}/#{__method__}")
       })
-      send_it(params, __method__, "html")
+      send_it(params)
   end
 end
